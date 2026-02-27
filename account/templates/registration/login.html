@@ -8,6 +8,7 @@
     <p style="color: red;">Invalid username or password. Please try again.</p>
   {% else %}
     <p>Please enter your username and password.</p>
+    <p>If you don't have an account, <a href="{% url 'register' %}">register here</a>.</p>
   {% endif %}
   <div class="login-form">
     <form method="post" action="{% url 'login' %}">
