@@ -20,15 +20,22 @@
         jQuery('#bookmarklet #close').click(function(){
             jQuery('#bookmarklet').remove();
         });
-        image_url = jQuery(image).attr('src');
-        jQuery('#bookmarklet .images').append('<a href="#"><img src="' + image_url + '" /></a>');
+        jQuery.each(jQuery('img[src$="jpg"], img[src$="jpeg"], img[src$="png"], img[src$="gif"]'), function(index, image) {
+            if (jQuery(image).width() >= min_width && jQuery(image).height() >= min_height) {
+                image_url = jQuery(image).attr('src');
+                jQuery('#bookmarklet .images').append('<a href="#"><img src="' + image_url + '" /></a>');
+            }
+        });
+
         jQuery('#bookmarklet .images a').click(function(e){
             selected_image = jQuery(this).children('img').attr('src');
             jQuery('#bookmarklet').hide();
             window.open(site_url + '/images/create/?url=' + encodeURIComponent(selected_image) + '&title=' + 
             encodeURIComponent(jQuery('title').text()), '_blank');
     });
+    };
 
+    
     // Check if jQuery is loaded
     if (typeof window.jQuery != 'undefined') {
         bookmarklet();
